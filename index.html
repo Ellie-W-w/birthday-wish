@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>地表最强 - 生日快乐</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 414px;
+            padding: 20px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.8s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .title {
+            font-size: 32px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: #666;
+        }
+
+        .stats-section {
+            margin: 30px 0;
+        }
+
+        .stat-item {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            color: white;
+            animation: fadeIn 1s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .stat-item:nth-child(1) { animation-delay: 0.2s; }
+        .stat-item:nth-child(2) { 
+            animation-delay: 0.4s;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+        .stat-item:nth-child(3) { 
+            animation-delay: 0.6s;
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+        .stat-item:nth-child(4) { 
+            animation-delay: 0.8s;
+            background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
+        }
+        .stat-item:nth-child(5) { 
+            animation-delay: 1s;
+            background: linear-gradient(135deg, #ff9a56 0%, #ff6a88 100%);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .stat-label {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-bottom: 8px;
+        }
+
+        .stat-value {
+            font-size: 36px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .stat-desc {
+            font-size: 13px;
+            opacity: 0.85;
+            margin-top: 8px;
+        }
+
+        .emoji {
+            font-size: 28px;
+        }
+
+        .warm-card {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            animation: fadeIn 1s ease-out;
+            animation-delay: 1.2s;
+            animation-fill-mode: both;
+            box-shadow: 0 10px 30px rgba(252, 182, 159, 0.3);
+        }
+
+        .warm-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #8b4513;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .warm-content {
+            font-size: 15px;
+            color: #5d4037;
+            line-height: 1.8;
+            text-align: left;
+        }
+
+        .warm-content p {
+            margin-bottom: 12px;
+        }
+
+        .warm-content strong {
+            color: #d84315;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px dashed #ddd;
+        }
+
+        .footer-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .footer-text {
+            font-size: 15px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .sparkle {
+            display: inline-block;
+            animation: sparkle 1.5s infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+
+        .firework {
+            position: fixed;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        @keyframes firework-explosion {
+            0% {
+                opacity: 1;
+                transform: translate(0, 0) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(var(--tx), var(--ty)) scale(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="header">
+                <div class="title">🎂 Happy Birthday To My No.1</div>
+                <div class="subtitle">地表最强 专属</div>
+            </div>
+
+            <div class="stats-section">
+                <div class="stat-item">
+                    <div class="stat-label">📅 本年度已解锁</div>
+                    <div class="stat-value">
+                        <span class="emoji">🎉</span>
+                        <span>+1</span>
+                    </div>
+                    <div class="stat-desc">新的一岁，新的传奇开始</div>
+                </div>
+
+                <div class="stat-item">
+                    <div class="stat-label">💪 战斗力指数</div>
+                    <div class="stat-value">
+                        <span class="emoji">⚡</span>
+                        <span>MAX</span>
+                    </div>
+                    <div class="stat-desc">超越99.9%的地球人</div>
+                </div>
+
+                <div class="stat-item">
+                    <div class="stat-label">✨ 魅力值</div>
+                    <div class="stat-value">
+                        <span class="emoji">🌟</span>
+                        <span>∞</span>
+                    </div>
+                    <div class="stat-desc">无法用数字衡量的存在</div>
+                </div>
+
+                <div class="stat-item">
+                    <div class="stat-label">🎁 好运加成</div>
+                    <div class="stat-value">
+                        <span class="emoji">🍀</span>
+                        <span>+999</span>
+                    </div>
+                    <div class="stat-desc">全年好运持续在线</div>
+                </div>
+
+                <div class="stat-item">
+                    <div class="stat-label">🏮 特殊意义</div>
+                    <div class="stat-value">
+                        <span class="emoji">🎊</span>
+                        <span>尾牙</span>
+                    </div>
+                    <div class="stat-desc">农历十二月十六 · 闽南传统节日<br>丰收与感恩的日子，双倍祝福</div>
+                </div>
+            </div>
+
+            <div class="warm-card">
+                <div class="warm-title">
+                    <span>💝</span>
+                    <span>想对你说</span>
+                </div>
+                <div class="warm-content">
+                    <p>Hey! 大摩羯~ 💫</p>
+                    <p>Crush（大叔知道crush的意思吗？哈哈哈）😏</p>
+                    <p>我遇见你很晚，但我想<strong>『陪伴』</strong>你很久，可以吗？🌟</p>
+                    <p>新的一岁，希望你在努力的同时，也能<strong>多爱自己一点</strong>。</p>
+                    <p>记得按时吃饭，好好休息！🍚💤</p>
+                    <p style="text-align: center; margin-top: 20px; font-size: 16px;">
+                        <strong>你已经很棒了，要对自己好一点！❤️</strong>
+                    </p>
+                    <p style="text-align: center; margin-top: 15px; font-size: 15px;">
+                        当然，不可以忘记我们的约定，嘿嘿~ 🤝✨
+                    </p>
+                </div>
+            </div>
+
+            <div class="footer">
+                <div class="footer-title">
+                    <span class="sparkle">✨</span> 
+                    生日快乐 
+                    <span class="sparkle">✨</span>
+                </div>
+                <div class="footer-text">
+                    愿你的每一天都充满惊喜<br>
+                    继续做那个独一无二的"地表最强"<br>
+                    <strong>新的一岁，继续发光！</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🎉 生日快乐！');
+            
+            // 烟花效果
+            document.addEventListener('click', function(e) {
+                createFirework(e.clientX, e.clientY);
+            });
+
+            function createFirework(x, y) {
+                const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#f9ca24', '#6c5ce7', '#fd79a8', '#fdcb6e', '#00b894'];
+                const particleCount = 30;
+                
+                for (let i = 0; i < particleCount; i++) {
+                    const particle = document.createElement('div');
+                    particle.className = 'firework';
+                    particle.style.left = x + 'px';
+                    particle.style.top = y + 'px';
+                    particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    
+                    const angle = (Math.PI * 2 * i) / particleCount;
+                    const velocity = 100 + Math.random() * 100;
+                    const tx = Math.cos(angle) * velocity;
+                    const ty = Math.sin(angle) * velocity;
+                    
+                    particle.style.setProperty('--tx', tx + 'px');
+                    particle.style.setProperty('--ty', ty + 'px');
+                    particle.style.animation = 'firework-explosion 1s ease-out forwards';
+                    
+                    document.body.appendChild(particle);
+                    
+                    setTimeout(() => {
+                        particle.remove();
+                    }, 1000);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
